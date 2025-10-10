@@ -11,10 +11,19 @@
     nixfmt
     vscodium
     neovim
-    transmission
+    transmission_3
     mpv
     keepassxc
   ];
+
+  home.shellAliases = {
+    ll = "ls -la";
+  };
+
+  programs.bash = {
+    enable = true;
+    enableCompletion = true; # Optional: enables Bash completion
+  };
 
   targets.genericLinux.enable  = true;
 
