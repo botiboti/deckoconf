@@ -10,6 +10,9 @@
   home.packages =
     with pkgs;
     let
+      social = [
+	vesktop
+      ];
       cli-tools = [
         btop
         eza
@@ -19,12 +22,13 @@
       ];
       dev = [
 	oterm
+        mob
         gcc
         nh
         nixfmt
-	nixpkgs-fmt
-	nix-tree
-	nix-output-monitor
+	      nixpkgs-fmt
+	      nix-tree
+	      nix-output-monitor
         neovim
         direnv
         nix-direnv
@@ -34,6 +38,7 @@
       media = [
         mpv
         transmission_4
+        nicotine-plus
       ];
       security = [
         keepassxc
@@ -49,7 +54,7 @@
         qpwgraph
       ];
     in
-    cli-tools ++ dev ++ media ++ security ++ browsers ++ misc ++ networking;
+    cli-tools ++ dev ++ media ++ security ++ browsers ++ misc ++ networking ++ social;
 
   home.shellAliases = {
     ll = "ls -la";
