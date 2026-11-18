@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  imports = [ ./battery-cap.nix ];
+
   home.username = "deck";
   home.homeDirectory = "/home/deck";
 
@@ -11,7 +13,7 @@
     with pkgs;
     let
       social = [
-	vesktop
+        vesktop
       ];
       cli-tools = [
         btop
@@ -21,14 +23,15 @@
         claude-code
       ];
       dev = [
-	oterm
+        # oterm # disabled: python3.14-primp (via ddgs) fails to build in nixpkgs f4a03c0 (zstd-sys)
         mob
         gcc
         nh
+        nodejs
         nixfmt
-	      nixpkgs-fmt
-	      nix-tree
-	      nix-output-monitor
+        nixpkgs-fmt
+        nix-tree
+        nix-output-monitor
         neovim
         direnv
         nix-direnv
@@ -96,9 +99,8 @@
     enableBashIntegration = true;
   };
 
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
-    package = pkgs.vscodium;
     profiles.default.extensions = with pkgs.vscode-extensions; [
       nonylene.dark-molokai-theme
       yzhang.markdown-all-in-one
