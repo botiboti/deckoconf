@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [ ./battery-cap.nix ];
 
@@ -149,6 +154,11 @@
   };
 
   targets.genericLinux.enable = true;
+
+  # KDE caches the resolved profile store path; a stale one makes launchers fail with "not authorized".
+  home.activation.refreshKdeMenu = lib.hm.dag.entryAfter [ "installPackages" "linkGeneration" ] ''
+    run --silence /usr/bin/kbuildsycoca6 || true
+  '';
 
   xdg = {
     enable = true;
